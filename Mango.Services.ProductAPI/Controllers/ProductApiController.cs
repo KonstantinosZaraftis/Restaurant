@@ -10,15 +10,15 @@ namespace Mango.Services.ProductAPI.Controllers
     public class ProductApiController : ControllerBase
     {
       
-        private IProductRepository _productRepository;
+        private readonly IProductRepository _productRepository;
 
-        public ProductApiController( IProductRepository productRepository)
+        public ProductApiController(IProductRepository productRepository)
         {
            
             _productRepository = productRepository;
         }
 
-        [HttpGet]
+        [HttpGet]//Get/api/products
         public async Task<IEnumerable<ProductDto>> GetProducts()
         {
             return await _productRepository.GetProducts();
@@ -40,6 +40,14 @@ namespace Mango.Services.ProductAPI.Controllers
         {
             return await _productRepository.CreateUpdateProduct (productDto);
         }
+
+        [HttpPut]
+        //Put/api/products
+        public  async Task<ProductDto> Put(ProductDto product)
+        {
+            return await _productRepository.CreateUpdateProduct(product);
+        }
+
         [HttpDelete] 
         //Delete/api/product
         public async Task<bool> Delete(int id)
