@@ -8,8 +8,12 @@ namespace Mango.Services.ProductAPI.Repository
 {
     public class ProductRepository : IProductRepository
     {
+        // We use two fields 
+        //One for the communicate with database
+        //the other we use Automapper to mapping source and destination model types
         private readonly ApplicationDbContext _db;
         private IMapper _mapper;
+
         public ProductRepository(ApplicationDbContext db,IMapper mapper)
         {
             _db = db;
@@ -17,7 +21,7 @@ namespace Mango.Services.ProductAPI.Repository
         }
 
 
-
+        //Implementation of interface 
         public async Task<IEnumerable<ProductDto>> GetProducts()
         {
             var productList = await _db.Products.ToListAsync();

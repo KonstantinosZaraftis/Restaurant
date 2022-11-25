@@ -8,6 +8,8 @@ namespace Mango.Web.Services.IServices
 {
     public class BaseService : IBaseService
     {
+
+        //Implement the interface
         public IHttpClientFactory _httpClient { get; set; }
         public ProductDto  productDto { get; set; }
 
@@ -17,7 +19,7 @@ namespace Mango.Web.Services.IServices
             productDto = new ProductDto();
         }
 
-        public async Task<T> Send1Async<T>(ApiRequest apiRequest)
+        public async Task<T> SendAsync<T>(ApiRequest apiRequest)
         {
             var client = _httpClient.CreateClient("FirstApiCall");
 
@@ -30,7 +32,7 @@ namespace Mango.Web.Services.IServices
                 message.Content=new StringContent(JsonConvert.SerializeObject(apiRequest.Data),Encoding.UTF8,"application/json");
             }
 
-            HttpResponseMessage apiResponse = null;
+            HttpResponseMessage response = null;
 
             switch (apiRequest.ApiType)
             {
@@ -50,13 +52,14 @@ namespace Mango.Web.Services.IServices
 
 
             }
-            apiResponse = await client.SendAsync(message);
-            var apiContect = await apiResponse.Content.ReadAsStringAsync();
-            var productDto = JsonConvert.DeserializeObject<T>(apiContect);
+            response = await client.SendAsync(message);
+            var apiResponse = await response.Content.ReadAsStringAsync();
+            var productDto = JsonConvert.DeserializeObject<T>(apiResponse);
             return productDto;
 
         }
 
+        // this method will be called by the consumer of the object when resoursen are released
         public void Dispose()
         {
             GC.SuppressFinalize(true);

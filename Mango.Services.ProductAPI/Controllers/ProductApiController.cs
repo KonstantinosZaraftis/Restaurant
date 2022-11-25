@@ -11,7 +11,7 @@ namespace Mango.Services.ProductAPI.Controllers
     {
       
         private readonly IProductRepository _productRepository;
-
+        //dependency Injection IProductRepository in constructor
         public ProductApiController(IProductRepository productRepository)
         {
            

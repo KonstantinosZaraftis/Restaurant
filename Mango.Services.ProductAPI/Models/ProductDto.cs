@@ -4,6 +4,7 @@ namespace Mango.Services.ProductAPI.Models
 {
     public class ProductDto
     {
+        //We use Dto to transef Data and not directly from the model
         public int ProductId { get; set; }
       
         public string Name { get; set; }

@@ -14,8 +14,9 @@ namespace Mango.Services.ProductAPI.DbContexts
 
            
         }
+        //Table in database
         public DbSet<Product>Products { get; set; }
-
+        //Populate database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
