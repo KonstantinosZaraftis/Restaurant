@@ -5,8 +5,6 @@ namespace Mango.Services.ProductAPI.Models.Dto
 {
     public class Product
     {
-        
-        //By default is the primary key
         public int ProductId { get; set; }
         [Required]
         public string Name { get; set; }
