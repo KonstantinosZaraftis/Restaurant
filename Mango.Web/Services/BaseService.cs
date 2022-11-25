@@ -8,7 +8,7 @@ namespace Mango.Web.Services
 
         public Task<T> SendAsync<T>(ApiRequest apiRequest)
         {
-            throw new NotImplementedException();
+            
         }
 
         public void Dispose()
