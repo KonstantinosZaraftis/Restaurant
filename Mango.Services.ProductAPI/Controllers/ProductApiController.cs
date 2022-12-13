@@ -11,17 +11,21 @@ namespace Mango.Services.ProductAPI.Controllers
     {
       
         private IProductRepository _productRepository;
+        public ProductDto productDto { get; set; }
 
         public ProductApiController( IProductRepository productRepository)
         {
-           
+             productDto = new ProductDto();
             _productRepository = productRepository;
+
         }
 
         [HttpGet]
         public async Task<IEnumerable<ProductDto>> GetProducts()
         {
-            return await _productRepository.GetProducts();
+           
+            IEnumerable<ProductDto> productDtos = await _productRepository.GetProducts();
+            return productDtos;
         }
 
         [HttpGet]
@@ -30,7 +34,11 @@ namespace Mango.Services.ProductAPI.Controllers
        
         public async Task<ProductDto> GetProduct(int id)
         {
-            return await _productRepository.GetProductById(id);
+            
+
+            var productDto= await _productRepository.GetProductById(id);
+            return productDto;
+            
         }
 
         [HttpPost]
@@ -38,13 +46,16 @@ namespace Mango.Services.ProductAPI.Controllers
 
         public async Task<ProductDto> Post(ProductDto productDto)
         {
-            return await _productRepository.CreateUpdateProduct (productDto);
+           var productDtoInDb= await _productRepository.CreateUpdateProduct(productDto);
+            return productDtoInDb;
         }
-        [HttpDelete] 
+        [HttpDelete]
+        [Route("{id}")]
         //Delete/api/product
         public async Task<bool> Delete(int id)
         {
-            return await _productRepository.DeleteProduct(id);
+            var productDtoInDb= await _productRepository.DeleteProduct(id);
+            return productDtoInDb;
         }
 
         
